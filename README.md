@@ -7,12 +7,12 @@ The code is not intended for production use and is not supported. The code is pr
 # 2DFS Artifacts Evaluation
 
 ## Requirements
-    - Any Linux/Darwin machine. This code has been tested on Ubuntu 22.04. 
-    - Docker (please follow [this guide](https://docs.docker.com/engine/install/) )
-    - Python 3.8 or higher installed. You can check your Python version by running:
-        ```bash
-        python3 --version
-        ```
+- Any Linux/Darwin machine. This code has been tested on Ubuntu 22.04. 
+- Docker (please follow [this guide](https://docs.docker.com/engine/install/) )
+- Python 3.8 or higher installed. You can check your Python version by running:
+    ```bash
+    python3 --version
+    ```
 
 ## Overview
 
@@ -35,7 +35,7 @@ How to evaluate the 2DFS artifacts presented in the ATC 2025 Paper. The evaluati
         ```
     - Install the required Python packages:
         ```bash
-        pip install -r requirements.txt
+        pip3 install -r requirements.txt
         ```
 
 
