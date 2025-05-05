@@ -66,7 +66,7 @@ These artifacts evaluation scripts reproduce all the results presented in the Ev
 ```bash
    python3 fig8.py
 ```
-*Expected behaviour:*
+#### Expected behaviour:
 During the experiment, for each experiment configuration, the script will print massages like the following:
 ```bash
 ###TDFS EXPERIMENT##
@@ -76,7 +76,8 @@ Total time:  12.2 Download time 1.4 Layering time 7.099999999999991
 ```
 Highlighting the Total build time, download time (from Dockerub) and container layering time for each experiment configuration. These results already give the user an idea of the performance of TDFS vs Docker. 
 
-At the end of the execution, the script will save the results in a file called `results_fig8.csv` in the current directory. The script will also generate a plot of the results and save it in a file called `fig8_reproduced.png` in the current directory. The plot will be saved in the same format as the one presented in the paper.
+#### Results:
+At the end of the execution, the script will save the results in a file called `results_fig8.csv` in the current directory. The script will also generate a plot of the results and save it in a file called `fig8_reproduced.pdf` in the current directory. The plot will be saved in the same format as the one presented in the paper.
 
 ### Figure 9
 
@@ -89,7 +90,7 @@ At the end of the execution, the script will save the results in a file called `
 ```bash
    python3 fig9.py
 ```
-*Expected behaviour:*
+#### Expected behaviour:
 During the experiment, for each experiment configuration, the script will print massages like the following:
 ```bash
 ###TDFS EXPERIMENT##
@@ -99,7 +100,8 @@ Total time:  12.2 Download time 1.4 Layering time 7.099999999999991
 ```
 Highlighting the Total build time, download time (from Dockerub) and container layering time for each experiment configuration. These results already give the user an idea of the performance of TDFS vs Docker. 
 
-At the end of the execution, the script will save the results in a file called `results_fig9.csv` in the current directory. The script will also generate a plot of the results and save it in a file called `fig9_reproduced.png` in the current directory. The plot will be saved in the same format as the one presented in the paper.
+#### Results:
+At the end of the execution, the script will save the results in a file called `results_fig9.csv` in the current directory. The script will also generate a plot of the results and save it in a file called `fig9_reproduced.pdf` in the current directory.
 
 ### Figure 10  
 
@@ -112,7 +114,7 @@ At the end of the execution, the script will save the results in a file called `
 ```bash
    python3 fig10.py
 ```
-*Expected behaviour:*
+#### Expected behaviour:
 During the experiment, for each experiment configuration, the script will print massages like the following:
 ```bash
 ###TDFS EXPERIMENT##
@@ -122,7 +124,8 @@ Total time:  12.2 Download time 1.4 Layering time 7.099999999999991
 ```
 Highlighting the Total build time, download time (from Dockerub) and container layering time for each experiment configuration. These results already give the user an idea of the performance of TDFS vs Docker. 
 
-At the end of the execution, the script will save the results in a file called `results_fig10.csv` and `cpumemoryusage.csv` in the current directory. The former contains the build output like for fig 8 and 9, while the latter the CPU an Memory consumptions measurements during the experiments. The script will also generate a plot of the results and save it in a file called `fig10_reproduced.png` in the current directory. The plot will be saved in the same format as the one presented in the paper.
+#### Results:
+At the end of the execution, the script will save the results in a file called `results_fig10.csv` and `cpumemoryusage.csv` in the current directory. The former contains the build output like for fig 8 and 9, while the latter the CPU an Memory consumptions measurements during the experiments. The script will also generate a plot of the results and save it in a file called `fig10_reproduced.pdf` in the current directory. 
 
 **Disclaimer:** CPU and Memory measurements fluctuate based on real time usage of the machine. Please consider this when interpreting the results. Additionally, due to high fluctuations the standard deviation of the measurements can be high, this effect is mitigated by running the experiment multiple times.
 
@@ -162,14 +165,10 @@ docker run -d -p 10500:5000 --restart=always --name 2dfs-registry ghcr.io/2dfs/2
     docker stop 2dfs-registry
 ```
 
+#### Expected behaviour:
+The script should run multiple Docker and TDFS builds, each one with a different configuration. At the end of each built it pushes the artifacts to the local registry. Then, it performs different pulls for each image partition. 
+
+#### Results:
+At the end of the execution, the script will save the results in files called `results_fig11.csv`, `cpumemoryusage.csv` and `bandwidth-result.log` in the current directory. The first contains the build output results, the second contains the CPU an Memory consumptions measurements during the experiments and the third containts the bandwidth measurements. The script will also generate the plots of the results and save them respectively in the files:  `fig11_reproduced.pdf`,`fig12_reproduced.pdf` and `fig13_reproduced.pdf` in the current directory.
+
 **Disclaimer:** CPU, Memory and bandwidth measurements fluctuate based on real time usage of the machine. In this script the registry is running locally with the builder. So expect additional background noise compared to the paper. Please consider this when interpreting the results. Additionally, due to high fluctuations the standard deviation of the measurements can be high, this effect is mitigated by running the experiment multiple times.
-
-### Figure 14
-
-<img src="figs/fig-14-1.png" alt="image" width="300"/>
-<img src="figs/fig-14-2.png" alt="image" width="300"/>
-
-- To run the evaluation for Figure 14, run the following command:
-```bash
-python3 evaluate_fig14.py
-```
