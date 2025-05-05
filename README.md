@@ -46,12 +46,6 @@ How to evaluate the 2DFS artifacts presented in the ATC 2025 Paper. The evaluati
 
 2. **Run the evaluation**: For each of the figures in our paper, we include a script to run its evaluation. The scripts assume that both docker and `tdfs` are installed and the `splits/` folder containing the models and splits is in the same directory as the evaluation scripts, so **make sure you completed the the steps above**. The scripts to be used to reproduce each figure are listed below. 
 
-#### Setup troubleshooting:
-- splits downlaod issues: If you have issues downloading the splits, please make sure you have enough space in your disk and upgrade `tar` util to its latest version. You can do this by running:
-    ```bash
-    sudo apt-get install --only-upgrade tar
-    ```
-
 ## Evaluation Scripts 
 
 These artifacts evaluation scripts reproduce all the results presented in the Evaluation section of the paper, specifically from Fig.8 to Fig. 14. 
