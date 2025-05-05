@@ -30,13 +30,11 @@ TDFS_FILES = [
     ]
 TDFS_COLS = [1,1,1,1,1,1,1,1,1,1,1,1,1,1]
 
-plt.rc('text', usetex=True)
 plt.rcParams['font.size'] = 20
 plt.rcParams['axes.linewidth'] = 2
 plt.rcParams.update({'figure.autolayout': True})
 plt.rcParams.update({'font.size': 20})
 plt.rcParams['axes.axisbelow'] = True
-plt.rcParams['font.sans-serif'] = "CMU Sans Serif"
 plt.rcParams['font.family'] = "sans-serif"
 plt.tight_layout()
 
@@ -139,7 +137,7 @@ if __name__ == "__main__":
 
             for manifest_n in tqdm(range(len(TDFS_FILES))):
 
-                print("\n ##FILE ## \n",str(TDFS_FILES[manifest_n]))
+                print("\n ##FILE ## ",str(TDFS_FILES[manifest_n]))
 
                 try:
                     os.remove("2dfs.json")
@@ -192,3 +190,7 @@ if __name__ == "__main__":
     
     # PLOT RESULTS
     gen_figure()
+
+    print("✅ Experiment completed")
+    print("Results saved to results_fig8.csv")
+    print("Figure saved to fig8_reproduced.pdf")

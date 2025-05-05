@@ -9,10 +9,15 @@ The code is not intended for production use and is not supported. The code is pr
 ## Requirements
 - Ubuntu 22.04 or newer. This code has been tested on Ubuntu 22.04. 
 - Docker installation (please follow [this guide](https://docs.docker.com/engine/install/) )
+- Rootless Docker installation. This is required to run the evaluation scripts without `sudo`. To do this, you need to add your user to the `docker` group. You can do this by running the following this [Docker Rootless documentation](https://docs.docker.com/engine/install/linux-postinstall/).
 - Python 3.8 or higher installed. You can check your Python version by running:
     ```bash
     python3 --version
     ```
+- Install `ifstat`. You can do this by running:
+```bash
+    sudo apt-get install ifstat 
+```
 
 ## Overview
 
@@ -29,7 +34,7 @@ How to evaluate the 2DFS artifacts presented in the ATC 2025 Paper. The evaluati
         ```
     - (1.3) Download and extract the evaluation dataset:
         ```bash
-        curl -L https://github.com/2DFS/artifacts-evaluation/releases/download/models/splits.zip -o splits.tar.gz
+        curl -L https://github.com/2DFS/artifacts-evaluation/releases/download/models/splits.tar.gz -o splits.tar.gz
         tar -xvf splits.tar.gz
         rm -rf splits.tar.gz
         ```
@@ -41,6 +46,11 @@ How to evaluate the 2DFS artifacts presented in the ATC 2025 Paper. The evaluati
 
 2. **Run the evaluation**: For each of the figures in our paper, we include a script to run its evaluation. The scripts assume that both docker and `tdfs` are installed and the `splits/` folder containing the models and splits is in the same directory as the evaluation scripts, so **make sure you completed the the steps above**. The scripts to be used to reproduce each figure are listed below. 
 
+#### Setup troubleshooting:
+- splits downlaod issues: If you have issues downloading the splits, please make sure you have enough space in your disk and upgrade `tar` util to its latest version. You can do this by running:
+    ```bash
+    sudo apt-get install --only-upgrade tar
+    ```
 
 ## Evaluation Scripts 
 
@@ -52,65 +62,113 @@ These artifacts evaluation scripts reproduce all the results presented in the Ev
 >```
 
 ### Figure 8
+
+- **Script setup time:** <1 minute
+- **Script execution time:** ~10 minutes
     
 ![image](figs/fig-8.png)
 
 - To run the evaluation for Figure 8, run the following command:
 ```bash
-   sudo python3 fig8.py
+   python3 fig8.py
 ```
-> N.b. The `sudo` command is required to run the evaluation for Figure 8, as it requires root privileges to access the Docker daemon. If your user is already in the `docker` group, you can run the command without `sudo`.
+*Expected behaviour:*
+During the experiment, for each experiment configuration, the script will print massages like the following:
+```bash
+###TDFS EXPERIMENT##
+Total time:  5.92 Download time 4.336642265319824 Layering time 0.3461027145385742
+###DOCKER EXPERIMENT##
+Total time:  12.2 Download time 1.4 Layering time 7.099999999999991
+```
+Highlighting the Total build time, download time (from Dockerub) and container layering time for each experiment configuration. These results already give the user an idea of the performance of TDFS vs Docker. 
 
-The script will run all the experiments and save the reuslts in a file called `results_fig8.csv` in the current directory. The script will also generate a plot of the results and save it in a file called `fig8_reproduced.png` in the current directory. The plot will be saved in the same format as the one presented in the paper.
-
+At the end of the execution, the script will save the results in a file called `results_fig8.csv` in the current directory. The script will also generate a plot of the results and save it in a file called `fig8_reproduced.png` in the current directory. The plot will be saved in the same format as the one presented in the paper.
 
 ### Figure 9
 
+- **Script setup time:** <1 minute
+- **Script execution time:** ~15 minutes
+
 ![image](figs/fig-9.png)
 
-- To run the evaluation for Figure 8, run the following command:
+- To run the evaluation for Figure 9, run the following command:
 ```bash
-   sudo python3 fig9.py
+   python3 fig9.py
 ```
-> N.b. The `sudo` command is required to run the evaluation for Figure 8, as it requires root privileges to access the Docker daemon. If your user is already in the `docker` group, you can run the command without `sudo`.
+*Expected behaviour:*
+During the experiment, for each experiment configuration, the script will print massages like the following:
+```bash
+###TDFS EXPERIMENT##
+Total time:  5.92 Download time 4.336642265319824 Layering time 0.3461027145385742
+###DOCKER EXPERIMENT##
+Total time:  12.2 Download time 1.4 Layering time 7.099999999999991
+```
+Highlighting the Total build time, download time (from Dockerub) and container layering time for each experiment configuration. These results already give the user an idea of the performance of TDFS vs Docker. 
 
-The script will run all the experiments and save the reuslts in a file called `results_fig9.csv` in the current directory. The script will also generate a plot of the results and save it in a file called `fig9_reproduced.png` in the current directory. The plot will be saved in the same format as the one presented in the paper.
+At the end of the execution, the script will save the results in a file called `results_fig9.csv` in the current directory. The script will also generate a plot of the results and save it in a file called `fig9_reproduced.png` in the current directory. The plot will be saved in the same format as the one presented in the paper.
 
 ### Figure 10  
+
+- **Script setup time:** <1 minute
+- **Script execution time:** ~5 minutes
 
 <img src="figs/fig-10.png" alt="image" width="300"/>
 
 - To run the evaluation for Figure 10, run the following command:
-    ```bash
-    python3 evaluate_fig10.py
-    ```
+```bash
+   python3 fig10.py
+```
+*Expected behaviour:*
+During the experiment, for each experiment configuration, the script will print massages like the following:
+```bash
+###TDFS EXPERIMENT##
+Total time:  5.92 Download time 4.336642265319824 Layering time 0.3461027145385742
+###DOCKER EXPERIMENT##
+Total time:  12.2 Download time 1.4 Layering time 7.099999999999991
+```
+Highlighting the Total build time, download time (from Dockerub) and container layering time for each experiment configuration. These results already give the user an idea of the performance of TDFS vs Docker. 
 
-### Figure 11
+At the end of the execution, the script will save the results in a file called `results_fig10.csv` and `cpumemoryusage.csv` in the current directory. The former contains the build output like for fig 8 and 9, while the latter the CPU an Memory consumptions measurements during the experiments. The script will also generate a plot of the results and save it in a file called `fig10_reproduced.png` in the current directory. The plot will be saved in the same format as the one presented in the paper.
+
+**Disclaimer:** CPU and Memory measurements fluctuate based on real time usage of the machine. Please consider this when interpreting the results. Additionally, due to high fluctuations the standard deviation of the measurements can be high, this effect is mitigated by running the experiment multiple times.
+
+### Figure 11, 12 and 13
+
+- **Script setup time:** ~5 minutes
+- **Script execution time:** ~10 minutes
+
 
 <img src="figs/fig-11.png" alt="image" width="300"/>
-
-- To run the evaluation for Figure 11, run the following command:
-    ```bash
-    python3 evaluate_fig11.py
-    ```
-
-### Figure 12
-
 <img src="figs/fig-12.png" alt="image" width="300"/>
-
-- To run the evaluation for Figure 12, run the following command:
-    ```bash
-    python3 evaluate_fig12.py
-    ```
-
-### Figure 13
-
 <img src="figs/fig-13.png" alt="image" width="300"/>
 
-- To run the evaluation for Figure 13, run the following command:
-    ```bash
-    python3 evaluate_fig13.py
-    ```
+Figures 11, 12 and 13 are generated together as part of the same experiment. 
+To run the evaluation for Figure 11, 12 and 13 follow these steps:
+
+- First, authorize the `2DFS+OCI` compliat registry to run locally. This is required to run the evaluation scripts. Edit the `/etc/docker/daemon.json` file and either replace its content with the following lines or simply add the primitive: 
+```json
+{
+    "insecure-registries" : ["0.0.0.0:10500"]
+}
+```
+- Then restart the Docker daemon by running:
+```bash
+    sudo systemctl restart docker
+```
+- Now you can run the 2DFS+OCI compliant registry locally using: 
+```bash
+docker run -d -p 10500:5000 --restart=always --name 2dfs-registry ghcr.io/2dfs/2dfs-registry:edge
+```
+- Then run the evaluation script:
+```bash
+    python3 fig11-13.py
+```
+- After the experiment is finished you can shut down the registry by running:
+```bash
+    docker stop 2dfs-registry
+```
+
+**Disclaimer:** CPU, Memory and bandwidth measurements fluctuate based on real time usage of the machine. In this script the registry is running locally with the builder. So expect additional background noise compared to the paper. Please consider this when interpreting the results. Additionally, due to high fluctuations the standard deviation of the measurements can be high, this effect is mitigated by running the experiment multiple times.
 
 ### Figure 14
 

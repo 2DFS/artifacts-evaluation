@@ -1,0 +1,1 @@
+ifstat -i docker0 -T -t 1 >> bandwidth-result.log
