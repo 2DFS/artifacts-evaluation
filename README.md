@@ -15,9 +15,9 @@ The code is not intended for production use and is not supported. The code is pr
     python3 --version
     ```
 - Install `ifstat`. You can do this by running:
-```bash
-    sudo apt-get install ifstat 
-```
+    ```bash
+        sudo apt-get install ifstat 
+    ```
 
 ## Overview
 
