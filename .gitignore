@@ -1,0 +1,14 @@
+/splits
+*.tar.gz
+.DS_Store
+*.pyc
+*.pkl
+*.pyd
+*.pdb
+*.egg
+*.egg-info
+__pycache__/
+*.so
+*.ipynb_checkpoints
+*.log
+*.csv
