@@ -22,7 +22,7 @@ REPEAT = os.getenv("EXPERIMENT_REPEAT", 1)
 COOLDOWN = 3 #SECONDS
 EXPERIMENT_ALLOTMENT_RATIO = [0,0.25,0.5,0.75,1]
 TDFS_FILES = [
-    "splits/yolov3_separated/field.json",
+    "splits/yolov3_seperated/field.json",
     ]
 
 TDFS_COLS = [1,1,1,1,1,1,1,1,1,1,1,1,1,1]
