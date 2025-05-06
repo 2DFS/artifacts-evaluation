@@ -22,7 +22,7 @@ REPEAT = os.getenv("EXPERIMENT_REPEAT", 1)
 COOLDOWN = 3 #SECONDS
 EXPERIMENT_ALLOTMENT_RATIO = [0,0.25,0.5,0.75,1]
 TDFS_FILES = [
-    "splits/efficientnet_v2L_seperated/field.json",
+    "splits/yolov3_separated/field.json",
     ]
 
 TDFS_COLS = [1,1,1,1,1,1,1,1,1,1,1,1,1,1]
@@ -70,7 +70,6 @@ def gen_figure():
         lambda row: row['amount']*100 / total_memory if row['type'] == "MEM" else row['amount'],
         axis=1
     )
-    print(cpu_df)
 
     fig = plt.figure(figsize=[6,5.3])
     colors=sns.color_palette("Paired")
@@ -78,14 +77,14 @@ def gen_figure():
     docker_data = [["ratio","type","data","tool"]]
     tdfs_data = [["ratio","type","data","tool"]]
     for index, row in df_xtended.iterrows():
-        cpuvals = cpu_df[cpu_df["time"].between(row["timestamp"]-(row["tot"]*1000+2000),row["timestamp"])][cpu_df["type"]=="CPU"]["amount"].values
+        cpuvals = cpu_df[cpu_df["time"].between(row["timestamp"]-(row["tot"]*1000-2000),row["timestamp"]+1000)][cpu_df["type"]=="CPU"]["amount"].values
         for v in cpuvals:
             if row["tool"]=="docker":
                 docker_data.append([row["ratio"],"cpu",v,"docker"])
             else:
                 tdfs_data.append([row["ratio"],"cpu",v,"tdfs"])
 
-        memvals= cpu_df[cpu_df["time"].between(row["timestamp"]-(row["tot"]*1000),row["timestamp"])][cpu_df["type"]=="MEM"]["amount"].values
+        memvals= cpu_df[cpu_df["time"].between(row["timestamp"]-(row["tot"]*1000-2000),row["timestamp"]+1000)][cpu_df["type"]=="MEM"]["amount"].values
         for v in memvals:
             if row["tool"]=="docker":
                 docker_data.append([row["ratio"],"mem",v,"docker"])
@@ -101,7 +100,6 @@ def gen_figure():
 
     
     combined_df['hue'] = combined_df['tool'] + "-" + combined_df['type']
-    print(combined_df)
     ax = sns.barplot(data=combined_df, x="ratio", y="data", hue="hue", errorbar="sd", palette=colors, linewidth=1, edgecolor='black',estimator="mean",hue_order=["tdfs-cpu","docker-cpu","tdfs-mem","docker-mem"])
 
     custom_lines = [patches.Patch(facecolor=colors[0],linewidth=1, edgecolor='black'),
@@ -122,7 +120,6 @@ def gen_figure():
 
     ax.set_xlabel("Model Split Capacity (\%)")
     ax.set_ylabel("Resource Usage (\%)")
-    ax.set_yticks(range(0,30,5),range(0,30,5),fontfamily='sans-serif')
 
     fig.savefig('fig10_reproduced.pdf', bbox_inches='tight') 
 

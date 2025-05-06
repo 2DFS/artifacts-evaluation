@@ -93,7 +93,6 @@ These artifact evaluation scripts reproduce all the results presented in the Eva
 
 ### Figure 8: Build time for a single image with increasing number of splits per layer.
 
-- **Script setup time:** <1 minute
 - **Script execution time:** ~10 minutes
     
 ![image](figs/fig-8.png)
@@ -118,7 +117,6 @@ At the end of the execution, the script will save the results in a file called `
 
 ### Figure 9: Build time for different split partitions where each partition is packaged as a separate image.
 
-- **Script setup time:** <1 minute
 - **Script execution time:** ~15 minutes
 
 ![image](figs/fig-9.png)
@@ -143,7 +141,6 @@ At the end of the execution, the script will save the results in a file called `
 
 ### Figure 10: Resources consumption during image build.
 
-- **Script setup time:** <1 minute
 - **Script execution time:** ~5 minutes
 
 <img src="figs/fig-10.png" alt="image" width="300"/>
@@ -170,7 +167,6 @@ At the end of the execution, the script will save the results in a file called `
 
 ### Figures 11, 12, and 13: Download of partitioned vs prebuilt images.
 
-- **Script setup time:** ~5 minutes
 - **Script execution time:** ~10 minutes
 
 <img src="figs/fig-11.png" alt="image" width="300"/>
@@ -197,7 +193,6 @@ At the end of the execution, the script will save the results in files called `r
 
 ### Figure 14: Build time after model updates with image caching.
 
-- **Script setup time:** <1 minute
 - **Script execution time:** ~10 minutes
 
 <img src="figs/fig-14-1.png" alt="image" width="300"/>
