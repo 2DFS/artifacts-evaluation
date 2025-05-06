@@ -61,10 +61,12 @@ If you are looking for a VM to replicate the results, we tested the code on an A
       ```bash
       ./setup_environment.sh
       ```
-- (1.3) Enter the virtual environment:   
+   - (1.3) Enter the virtual environment: 
+
       ```bash
       source ./venv/bin/activate
       ```
+
       > At the end of the experiments you can deactive the virtual environment and cleanup the container registry with the `./cleanup_environment.sh` command. 
 
 
