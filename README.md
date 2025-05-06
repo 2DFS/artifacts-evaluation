@@ -21,6 +21,14 @@ The code is not intended for production use and is not supported. In no event sh
  ```bash
     python3 --version
  ```
+- `pip3` installed. You can install pip3 using:
+  ```
+  sudo apt install python3-pip
+  ```
+- `venv` python virtual environment. You can install venv using:
+  ```
+  sudo apt install python3-venv
+  ```
 - Install `ifstat`. You can do this by running:
  ```bash
      sudo apt-get install ifstat 
@@ -46,7 +54,14 @@ The code is not intended for production use and is not supported. In no event sh
       tar -xvf splits.tar.gz
       rm -rf splits.tar.gz
       ```
-    - (1.4) Install the required Python packages:
+    - (1.4) Create a python `venv` virtual environment and activate it
+      ```bash
+      python3 -m venv ./venv
+      source ./venv/bin/activate
+      ```
+      > At the end of the experiments you can deactive the virtual environment with the `deactivate` command. 
+
+    - (1.5) Install the required Python packages:
       ```bash
       pip3 install -r requirements.txt
       ```
@@ -55,7 +70,7 @@ The code is not intended for production use and is not supported. In no event sh
 2. **Run the evaluation scripts**: For each of the figures in our paper, we include a script to run its evaluation. The scripts assume that both docker and `tdfs` are installed and the `splits/` folder containing the models and splits is in the same directory as the evaluation scripts, so **make sure you completed the step above**. The scripts to reproduce each figure are available [below](#evaluation-scripts).
 
 3. **Get the results**: The results of each experiment will be saved in the current directory both as `.csv` files and as `.pdf`, reproducing the results and pictures of the paper. The files use the common filename structure `results_fig<fig-number>.csv` and `fig<fig-number>_reproduced.pdf`. For example, the results of Figure 8 will be saved in `results_fig8.csv`, and the plot will be saved in `fig8_reproduced.pdf`. 
-The results might slightly differ in scale from the values of the paper due to different machine configurations and environments. For example, faster Read/Write speed on the disk compared to the machines used in the evaluation of the paper will lead to faster build times. 
+The results might slightly differ in scale from the values of the paper due to different machine configurations and environments. For example, faster Read/Write speed on the disk compared to the machines used in the evaluation of the paper will lead to faster build times.
 
 ## Evaluation Scripts 
 
