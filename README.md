@@ -16,15 +16,15 @@ The code is not intended for production use and is not supported. In no event sh
 ## Looking for a VM to replicate the results?
 If you are looking for a VM to replicate the results, we tested the code on an AWS VM with the following configuration:
 
-![](figs/aws_vm_summary.png)
-![](figs/aws_image_config.png)
-![](figs/aws_cpu.png)
+<img src="./figs/aws_vm_summary.png" alt="image" width="300"/>
+<img src="./figs/aws_image_config.png" alt="image" width="300"/>
+<img src="./figs/aws_cpu.png" alt="image" width="300"/>
+
 - **OS:** Ubuntu 22.04 Server SSD Volume type
 - **Instance type:** `c5.4xlarge`
-- **vCPUs:** 4x
+- **vCPUs:** 4x (**Important** the more concurrency capability you have, the faster the experiments will run and the higher the gap between TDFS and Docker will be)
 - **RAM:** 8 GB
 - **Disk:** 40 GB
-
 
 ## Requirements
 - Ubuntu 22.04 or newer. This code has been tested on Ubuntu 22.04. 
@@ -67,13 +67,20 @@ If you are looking for a VM to replicate the results, we tested the code on an A
       source ./venv/bin/activate
       ```
 
-      > At the end of the experiments you can deactive the virtual environment and cleanup the container registry with the `./cleanup_environment.sh` command. 
+      > At the end of the experiments you can deactive the virtual environment using `deactivate` and cleanup the container registry with the `./cleanup_environment.sh` command. 
 
 
 2. **Run the evaluation scripts**: For each of the figures in our paper, we include a script to run its evaluation. The scripts assume that both docker and `tdfs` are installed and the `splits/` folder containing the models and splits is in the same directory as the evaluation scripts, so **make sure you completed the step above**. The scripts to reproduce each figure are available [below](#evaluation-scripts).
 
 3. **Get the results**: The results of each experiment will be saved in the current directory both as `.csv` files and as `.pdf`, reproducing the results and pictures of the paper. The files use the common filename structure `results_fig<fig-number>.csv` and `fig<fig-number>_reproduced.pdf`. For example, the results of Figure 8 will be saved in `results_fig8.csv`, and the plot will be saved in `fig8_reproduced.pdf`. 
-The results might slightly differ in scale from the values of the paper due to different machine configurations and environments. For example, faster Read/Write speed on the disk compared to the machines used in the evaluation of the paper will lead to faster build times.
+
+   If you're using a remote vm, you can use `scp` to copy the results to your local machine. For example, if you're using an AWS VM, you can run the following command from your local machine, E.g.:
+   ```bash
+   scp -i <path-to-your-aws-key> -r ubuntu@<your-aws-ip>:~/ATC25-2dfs-artifacts-evaluation/fig8_reproduced.pdf .
+   ```
+   Where `<path-to-your-aws-key>` is the path to your AWS key, `<your-aws-ip>` is the public IP of your AWS VM.
+
+   The results might slightly differ in scale from the values of the paper due to different machine configurations and environments. For example, faster Read/Write speed on the disk compared to the machines used in the evaluation of the paper will lead to faster build times.
 
 ## Evaluation Scripts 
 
