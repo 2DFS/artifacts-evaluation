@@ -109,7 +109,7 @@ Total time:  5.92 Download time 4.336642265319824 Layering time 0.34610271453857
 ###DOCKER EXPERIMENT##
 Total time:  12.2 Download time 1.4 Layering time 7.099999999999991
 ```
-They highlight the total build time, download time (from Dockerub), and container layering time for each experiment configuration. These results already give the user an idea of the performance of TDFS vs Docker. 
+They highlight the total build time, download time (from the local registry), and container layering time for each experiment configuration. These results already give the user an idea of the performance of TDFS vs Docker. 
 N.b.: the download time is not considered in the final results of the paper as it is considered not relevant, but it is included in the output for completeness.
 
 #### Results:
@@ -133,7 +133,7 @@ Total time:  5.92 Download time 4.336642265319824 Layering time 0.34610271453857
 ###DOCKER EXPERIMENT##
 Total time:  12.2 Download time 1.4 Layering time 7.099999999999991
 ```
-They highlightg the Total build time, download time (from Dockerub,) and container layering time for each experiment configuration. These results already give the user an idea of the performance of TDFS vs Docker. 
+They highlightg the Total build time, download time (from the local registry) and container layering time for each experiment configuration. These results already give the user an idea of the performance of TDFS vs Docker. 
 N.b.: the download time is not considered in the final results of the paper as it is considered not relevant, but it is included in the output for completeness.
 
 #### Results:
@@ -157,7 +157,7 @@ Total time:  5.92 Download time 4.336642265319824 Layering time 0.34610271453857
 ###DOCKER EXPERIMENT##
 Total time:  12.2 Download time 1.4 Layering time 7.099999999999991
 ```
-They highlight the Total build time, download time (from Dockerub), and container layering time for each experiment configuration. These results already give the user an idea of the performance of TDFS vs Docker. 
+They highlight the Total build time, download time (from the local registry), and container layering time for each experiment configuration. These results already give the user an idea of the performance of TDFS vs Docker. 
 N.b.: the download time is not considered in the final results of the paper as it is considered not relevant, but it is included in the output for completeness.
 
 #### Results:
