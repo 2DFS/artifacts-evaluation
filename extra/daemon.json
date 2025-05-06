@@ -1,0 +1,8 @@
+{
+    "features": {
+        "containerd-snapshotter": true
+    },
+    "insecure-registries": [
+        "0.0.0.0:10500"
+    ]
+}

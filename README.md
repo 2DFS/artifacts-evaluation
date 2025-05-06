@@ -53,31 +53,16 @@ If you are looking for a VM to replicate the results, we tested the code on an A
 **A:** The evaluation is based on the following steps:
 
 1. **Setup the environment**: Setup the environment of the machine where you want to run the evaluation scripts be following the steps below:
-    - (1.1) Install the latest `tdfs`CLI utility: 
-      ```bash
-      curl -sfL 2dfs.github.io/install-tdfs.sh | sh - 
-      ```
-    - (1.2) Clone this repository and navigate its root directory:
+    - (1.1) Clone this repository and navigate its root directory:
       ```bash
       git clone https://github.com/2DFS/artifacts-evaluation ATC25-2dfs-artifacts-evaluation && cd ATC25-2dfs-artifacts-evaluation
       ```
-    - (1.3) Download and extract the evaluation dataset:
+    - (1.2) Install the latest `tdfs`CLI utility, python packages, configure the local registry access, the docker containerd snapshotter and download the dataset using using the following command:
       ```bash
-      curl -L https://github.com/2DFS/artifacts-evaluation/releases/download/models/splits.tar.gz -o splits.tar.gz
-      tar -xvf splits.tar.gz
-      rm -rf splits.tar.gz
+      ./setup_environment.sh
       ```
-    - (1.4) Create a python `venv` virtual environment and activate it
-      ```bash
-      python3 -m venv ./venv
-      source ./venv/bin/activate
-      ```
-      > At the end of the experiments you can deactive the virtual environment with the `deactivate` command. 
+      > At the end of the experiments you can deactive the virtual environment and cleanup the container registry with the `./cleanup_environment.sh` command. 
 
-    - (1.5) Install the required Python packages:
-      ```bash
-      pip3 install -r requirements.txt
-      ```
 
 
 2. **Run the evaluation scripts**: For each of the figures in our paper, we include a script to run its evaluation. The scripts assume that both docker and `tdfs` are installed and the `splits/` folder containing the models and splits is in the same directory as the evaluation scripts, so **make sure you completed the step above**. The scripts to reproduce each figure are available [below](#evaluation-scripts).
@@ -183,28 +168,12 @@ At the end of the execution, the script will save the results in a file called `
 Figures 11, 12, and 13 are generated together as part of the same experiment. 
 To run the evaluation for Figures 11, 12, and 13, follow these steps:
 
-- First, authorize the `2DFS+OCI` compliant registry to run locally. This is required to run the evaluation scripts. Edit the `/etc/docker/daemon.json` file and either replace its content with the following lines or simply add the primitive: 
-```json
-{
-    "insecure-registries" : ["0.0.0.0:10500"]
-}
-```
-- Then restart the Docker daemon by running:
+
+- To run the evaluation for Figure 11,12 and 13, run the following command:
 ```bash
-    sudo systemctl restart docker
+   python3 fig11-13.py
 ```
-- Now you can run the 2DFS+OCI compliant registry locally using: 
-```bash
-docker run -d -p 10500:5000 --restart=always --name 2dfs-registry ghcr.io/2dfs/2dfs-registry:edge
-```
-- Then run the evaluation script:
-```bash
-    python3 fig11-13.py
-```
-- After the experiment is finished, you can shut down the registry by running the following:
-```bash
-    docker stop 2dfs-registry
-```
+
 
 #### Expected behavior:
 The script should run multiple Docker and TDFS builds, each one with a different configuration. At the end of each build, it pushes the artifacts to the local registry. Then, it performs different pulls for each image partition. 
