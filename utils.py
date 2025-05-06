@@ -134,7 +134,7 @@ def gen_dockerfile(manifest_path):
     with open(manifest_path) as f:
         manifest = json.load(f)
 
-    dockerfile = "FROM ubuntu:22.04\n"
+    dockerfile = "FROM 0.0.0.0:10500/2dfs/ubuntu:22.04\n"
     i = 0
 
     for allotment in manifest["allotments"]:
@@ -158,7 +158,7 @@ def gen_dockerfile_partitioned(manifest_path,ratio,startfrom=0,batchsize=0):
     with open(manifest_path) as f:
         manifest = json.load(f)
 
-    dockerfile = "FROM ubuntu:22.04\n"
+    dockerfile = "FROM 0.0.0.0:10500/2dfs/ubuntu:22.04\n"
     i = 0
 
     tot_allotments = int(len(manifest["allotments"])*ratio)
@@ -194,7 +194,7 @@ def cleanup_dir(dir):
         pass
 
 def build_tdfs(tag=""):
-    cmd = ["time","tdfs", "build", "ubuntu:22.04","0.0.0.0:10500/test/testtdfs:v1"+tag,"--platforms", "linux/amd64","--force-http"]
+    cmd = ["time","tdfs", "build", "0.0.0.0:10500/2dfs/ubuntu:22.04","0.0.0.0:10500/test/testtdfs:v1"+tag,"--platforms", "linux/amd64","--force-http"]
     return exec_command(cmd)
 
 def export_tdfs(partition,expname):

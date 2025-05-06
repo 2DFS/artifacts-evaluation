@@ -22,7 +22,8 @@ docker run -d -p 10500:5000 --restart=always --name 2dfs-registry ghcr.io/2dfs/2
 
 echo "🛠️ Downloading ubuntu:22.04 base image"
 docker pull ubuntu:22.04 
-docker tag ubuntu:22.04  0.0.0.0:105000/ubuntu:22.04
+docker tag ubuntu:22.04  0.0.0.0:105000/2dfs/ubuntu:22.04
+docker push 0.0.0.0:105000/2dfs/ubuntu:22.04
 
 echo "🛠️ Set venv"
 python3 -m venv ./venv
