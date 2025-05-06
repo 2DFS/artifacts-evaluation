@@ -18,9 +18,9 @@ The code is not intended for production use and is not supported. In no event sh
 - Docker installation (please follow [this guide](https://docs.docker.com/engine/install/ubuntu/))
 - Rootless Docker installation. This is required to run the evaluation scripts without `sudo`. To do this, you need to add your user to the `docker` group. Please refer to the following [Docker Rootless documentation](https://docs.docker.com/engine/install/linux-postinstall/).
 - Python 3.8 or higher installed. You can check your Python version by running:
- ```bash
-    python3 --version
- ```
+  ```bash
+  python3 --version
+  ```
 - `pip3` installed. You can install pip3 using:
   ```
   sudo apt install python3-pip
@@ -29,10 +29,10 @@ The code is not intended for production use and is not supported. In no event sh
   ```
   sudo apt install python3-venv
   ```
-- Install `ifstat`. You can do this by running:
- ```bash
-     sudo apt-get install ifstat 
- ```
+- Install `ifstat`. Simply run:
+  ```bash
+  sudo apt-get install ifstat 
+  ```
 
 ## Overview
 
