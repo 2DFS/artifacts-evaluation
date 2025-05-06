@@ -80,7 +80,7 @@ If you are looking for a VM to replicate the results, we tested the code on an A
    ```
    Where `<path-to-your-aws-key>` is the path to your AWS key, `<your-aws-ip>` is the public IP of your AWS VM.
 
-   The results might slightly differ in scale from the values of the paper due to different machine configurations and environments. For example, faster Read/Write speed on the disk compared to the machines used in the evaluation of the paper will lead to faster build times.
+   The results might slightly differ in scale from the values of the paper due to different machine configurations and environments. For example, lower degree of parallelism or slower Read/Write speed on the disk compared to the machines used in the evaluation of the paper will lead to faster build times. Please refer to the [**How to interpret the results**](#how-to-interpret-the-results) section below for more details.
 
 ## Evaluation Scripts 
 
@@ -211,8 +211,14 @@ Total time:  5.59 Download time 0.3019580841064453 Layering time 2.4875688552856
 ###DOCKER EXPERIMENT##
 Total time:  84.81 Download time 12.299999999999983 Layering time 15.29999999999998
 ```
-They highlight the Total build time, download time (from Dockerub), and container layering time for each experiment configuration. These results already give the user an idea of the performance of TDFS vs Docker. 
+They highlight the Total build time, download time (from the local registry), and container layering time for each experiment configuration. These results already give the user an idea of the performance of TDFS vs Docker. 
 N.b.: the download time is not considered in the final results of the paper as it is considered not relevant, but it is included in the output for completeness.
 
 #### Results:
 At the end of the execution, the script will save the results in a file called `results_fig14.csv` in the current directory. This file contains the execution results. The script will also generate a plot of the results and save them respectively in `fig14_a_reproduced.pdf` and `fig14_b_reproduced.pdf` in the current directory. 
+
+## How to interpret the results
+
+The 2DFS utility is designed to exploit CPU parallelism to boost the image build time. The results of the experiments are highly affected by the number of cores available in the machine as well as the maximum Read/Write speed of the disk. For example, a machine with 16 cores gives much more parallelism to 2DFS compared to a machine with 4, while Docker builds are pretty much only affected by the processing speed and not parallelism. While the results are reproducible and potentially consistent, the scale of the gap and the absolute values of the build and caching time may vary based on the machine configuration.
+
+Another consideration is that while on the paper, we evaluate using a `2dfs` compliant registry in isolated machines; in this proposed experimental setup, we install everything locally to simplify the installation time. This means that the registry is not isolated from the builder, and the measurements are affected by both the runtime making the request and the registry serving the images. Therefore, the memory and CPU consumption might be slightly higher than the one presented in the paper.
