@@ -33,23 +33,23 @@ The code is not intended for production use and is not supported. In no event sh
 
 1. **Setup the environment**: Setup the environment of the machine where you want to run the evaluation scripts be following the steps below:
     - (1.1) Install the latest `tdfs`CLI utility: 
- ```bash
-        curl -sfL 2dfs.github.io/install-tdfs.sh | sh - 
- ```
+      ```bash
+      curl -sfL 2dfs.github.io/install-tdfs.sh | sh - 
+      ```
     - (1.2) Clone this repository and navigate its root directory:
- ```bash
-        git clone https://github.com/2DFS/artifacts-evaluation ATC25-2dfs-artifacts-evaluation && cd ATC25-2dfs-artifacts-evaluation
- ```
+      ```bash
+      git clone https://github.com/2DFS/artifacts-evaluation ATC25-2dfs-artifacts-evaluation && cd ATC25-2dfs-artifacts-evaluation
+      ```
     - (1.3) Download and extract the evaluation dataset:
- ```bash
-        curl -L https://github.com/2DFS/artifacts-evaluation/releases/download/models/splits.tar.gz -o splits.tar.gz
-        tar -xvf splits.tar.gz
-        rm -rf splits.tar.gz
- ```
+      ```bash
+      curl -L https://github.com/2DFS/artifacts-evaluation/releases/download/models/splits.tar.gz -o splits.tar.gz
+      tar -xvf splits.tar.gz
+      rm -rf splits.tar.gz
+      ```
     - (1.4) Install the required Python packages:
- ```bash
-        pip3 install -r requirements.txt
- ```
+      ```bash
+      pip3 install -r requirements.txt
+      ```
 
 
 2. **Run the evaluation scripts**: For each of the figures in our paper, we include a script to run its evaluation. The scripts assume that both docker and `tdfs` are installed and the `splits/` folder containing the models and splits is in the same directory as the evaluation scripts, so **make sure you completed the step above**. The scripts to reproduce each figure are available [below](#evaluation-scripts).
