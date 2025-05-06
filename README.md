@@ -61,11 +61,11 @@ If you are looking for a VM to replicate the results, we tested the code on an A
       ```bash
       ./setup_environment.sh
       ```
-      > At the end of the experiments you can deactive the virtual environment and cleanup the container registry with the `./cleanup_environment.sh` command. 
 - (1.3) Enter the virtual environment:   
       ```bash
       source ./venv/bin/activate
       ```
+      > At the end of the experiments you can deactive the virtual environment and cleanup the container registry with the `./cleanup_environment.sh` command. 
 
 
 2. **Run the evaluation scripts**: For each of the figures in our paper, we include a script to run its evaluation. The scripts assume that both docker and `tdfs` are installed and the `splits/` folder containing the models and splits is in the same directory as the evaluation scripts, so **make sure you completed the step above**. The scripts to reproduce each figure are available [below](#evaluation-scripts).
