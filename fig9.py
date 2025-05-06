@@ -38,35 +38,6 @@ plt.rcParams['axes.axisbelow'] = True
 plt.rcParams['font.family'] = "sans-serif"
 plt.tight_layout()
 
-def map_name(x):
-    if  "efficientnet_v2B0" in x:
-        return "ENv2B0"
-    if  "efficientnet_v2B1" in x:
-        return "ENv2B1"
-    if  "efficientnet_v2B2" in x:
-        return "ENv2B2"
-    if  "efficientnet_v2B3" in x:
-        return "ENv2B3"
-    if "efficientnet_v2S" in x:
-        return "ENv2S"
-    if "efficientnet_v2M" in x:
-        return "ENv2M"
-    if "efficientnet_v2L" in x:
-        return "ENv2L"
-    if "resnet50" in x:
-        return "RN50"
-    if "resnet101" in x:
-        return "RN101"
-    if "resnet152" in x:
-        return "RN152"
-    if "deeplab_v3" in x:
-        return "DLv3"
-    if "mobilenet_v2_seperated" in x:
-        return "MNv2"
-    if "mobilenet_v2_14" in x:
-        return "MNv2L"
-    if "yolov3" in x:
-        return "YOLOv3"
 
 def gen_figure():
 
