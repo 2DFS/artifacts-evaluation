@@ -28,16 +28,24 @@ If you are looking for a VM to replicate the results, we tested the code on an A
 
 ## Requirements
 - Ubuntu 22.04 or newer. This code has been tested on Ubuntu 22.04. 
-- Docker installation (please follow [this guide](https://docs.docker.com/engine/install/) )
+- Docker installation (please follow [this guide](https://docs.docker.com/engine/install/ubuntu/))
 - Rootless Docker installation. This is required to run the evaluation scripts without `sudo`. To do this, you need to add your user to the `docker` group. Please refer to the following [Docker Rootless documentation](https://docs.docker.com/engine/install/linux-postinstall/).
 - Python 3.8 or higher installed. You can check your Python version by running:
- ```bash
-    python3 --version
- ```
-- Install `ifstat`. You can do this by running:
- ```bash
-     sudo apt-get install ifstat 
- ```
+  ```bash
+  python3 --version
+  ```
+- `pip3` installed. You can install pip3 using:
+  ```
+  sudo apt install python3-pip
+  ```
+- `venv` python virtual environment. You can install venv using:
+  ```
+  sudo apt install python3-venv
+  ```
+- Install `ifstat`. Simply run:
+  ```bash
+  sudo apt-get install ifstat 
+  ```
 
 ## Experiment setup
 
@@ -46,29 +54,36 @@ If you are looking for a VM to replicate the results, we tested the code on an A
 
 1. **Setup the environment**: Setup the environment of the machine where you want to run the evaluation scripts be following the steps below:
     - (1.1) Install the latest `tdfs`CLI utility: 
- ```bash
-        curl -sfL 2dfs.github.io/install-tdfs.sh | sh - 
- ```
+      ```bash
+      curl -sfL 2dfs.github.io/install-tdfs.sh | sh - 
+      ```
     - (1.2) Clone this repository and navigate its root directory:
- ```bash
-        git clone https://github.com/2DFS/artifacts-evaluation ATC25-2dfs-artifacts-evaluation && cd ATC25-2dfs-artifacts-evaluation
- ```
+      ```bash
+      git clone https://github.com/2DFS/artifacts-evaluation ATC25-2dfs-artifacts-evaluation && cd ATC25-2dfs-artifacts-evaluation
+      ```
     - (1.3) Download and extract the evaluation dataset:
- ```bash
-        curl -L https://github.com/2DFS/artifacts-evaluation/releases/download/models/splits.tar.gz -o splits.tar.gz
-        tar -xvf splits.tar.gz
-        rm -rf splits.tar.gz
- ```
-    - (1.4) Install the required Python packages:
- ```bash
-        pip3 install -r requirements.txt
- ```
+      ```bash
+      curl -L https://github.com/2DFS/artifacts-evaluation/releases/download/models/splits.tar.gz -o splits.tar.gz
+      tar -xvf splits.tar.gz
+      rm -rf splits.tar.gz
+      ```
+    - (1.4) Create a python `venv` virtual environment and activate it
+      ```bash
+      python3 -m venv ./venv
+      source ./venv/bin/activate
+      ```
+      > At the end of the experiments you can deactive the virtual environment with the `deactivate` command. 
+
+    - (1.5) Install the required Python packages:
+      ```bash
+      pip3 install -r requirements.txt
+      ```
 
 
 2. **Run the evaluation scripts**: For each of the figures in our paper, we include a script to run its evaluation. The scripts assume that both docker and `tdfs` are installed and the `splits/` folder containing the models and splits is in the same directory as the evaluation scripts, so **make sure you completed the step above**. The scripts to reproduce each figure are available [below](#evaluation-scripts).
 
 3. **Get the results**: The results of each experiment will be saved in the current directory both as `.csv` files and as `.pdf`, reproducing the results and pictures of the paper. The files use the common filename structure `results_fig<fig-number>.csv` and `fig<fig-number>_reproduced.pdf`. For example, the results of Figure 8 will be saved in `results_fig8.csv`, and the plot will be saved in `fig8_reproduced.pdf`. 
-The results might slightly differ in scale from the values of the paper due to different machine configurations and environments. For example, faster Read/Write speed on the disk compared to the machines used in the evaluation of the paper will lead to faster build times. 
+The results might slightly differ in scale from the values of the paper due to different machine configurations and environments. For example, faster Read/Write speed on the disk compared to the machines used in the evaluation of the paper will lead to faster build times.
 
 ## Evaluation Scripts 
 
