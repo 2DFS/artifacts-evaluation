@@ -13,6 +13,19 @@ The code is not intended for production use and is not supported. In no event sh
 
 # How to reproduce the paper results
 
+## Looking for a VM to replicate the results?
+If you are looking for a VM to replicate the results, we tested the code on an AWS VM with the following configuration:
+
+<img src="./figs/aws_vm_summary.png" alt="image" width="300"/>
+<img src="./figs/aws_image_config.png" alt="image" width="500"/>
+<img src="./figs/aws_cpu.png" alt="image" width="500"/>
+
+- **OS:** Ubuntu 22.04 Server SSD Volume type
+- **Instance type:** `c5.4xlarge`
+- **vCPUs:** 4x (**Important** the more concurrency capability you have, the faster the experiments will run and the higher the gap between TDFS and Docker will be)
+- **RAM:** 8 GB
+- **Disk:** 40 GB
+
 ## Requirements
 - Ubuntu 22.04 or newer. This code has been tested on Ubuntu 22.04. 
 - Docker installation (please follow [this guide](https://docs.docker.com/engine/install/ubuntu/))
@@ -34,43 +47,40 @@ The code is not intended for production use and is not supported. In no event sh
   sudo apt-get install ifstat 
   ```
 
-## Overview
+## Experiment setup
 
 **Q:** How to evaluate the 2DFS artifacts presented in the ATC 2025 Paper?  <br>
 **A:** The evaluation is based on the following steps:
 
 1. **Setup the environment**: Setup the environment of the machine where you want to run the evaluation scripts be following the steps below:
-    - (1.1) Install the latest `tdfs`CLI utility: 
-      ```bash
-      curl -sfL 2dfs.github.io/install-tdfs.sh | sh - 
-      ```
-    - (1.2) Clone this repository and navigate its root directory:
+    - (1.1) Clone this repository and navigate its root directory:
       ```bash
       git clone https://github.com/2DFS/artifacts-evaluation ATC25-2dfs-artifacts-evaluation && cd ATC25-2dfs-artifacts-evaluation
       ```
-    - (1.3) Download and extract the evaluation dataset:
+    - (1.2) Install the latest `tdfs`CLI utility, python packages, configure the local registry access, the docker containerd snapshotter and download the dataset using using the following command:
       ```bash
-      curl -L https://github.com/2DFS/artifacts-evaluation/releases/download/models/splits.tar.gz -o splits.tar.gz
-      tar -xvf splits.tar.gz
-      rm -rf splits.tar.gz
+      ./setup_environment.sh
       ```
-    - (1.4) Create a python `venv` virtual environment and activate it
+   - (1.3) Enter the virtual environment: 
+
       ```bash
-      python3 -m venv ./venv
       source ./venv/bin/activate
       ```
-      > At the end of the experiments you can deactive the virtual environment with the `deactivate` command. 
 
-    - (1.5) Install the required Python packages:
-      ```bash
-      pip3 install -r requirements.txt
-      ```
+      > At the end of the experiments you can deactive the virtual environment using `deactivate` and cleanup the container registry with the `./cleanup_environment.sh` command. 
 
 
 2. **Run the evaluation scripts**: For each of the figures in our paper, we include a script to run its evaluation. The scripts assume that both docker and `tdfs` are installed and the `splits/` folder containing the models and splits is in the same directory as the evaluation scripts, so **make sure you completed the step above**. The scripts to reproduce each figure are available [below](#evaluation-scripts).
 
 3. **Get the results**: The results of each experiment will be saved in the current directory both as `.csv` files and as `.pdf`, reproducing the results and pictures of the paper. The files use the common filename structure `results_fig<fig-number>.csv` and `fig<fig-number>_reproduced.pdf`. For example, the results of Figure 8 will be saved in `results_fig8.csv`, and the plot will be saved in `fig8_reproduced.pdf`. 
-The results might slightly differ in scale from the values of the paper due to different machine configurations and environments. For example, faster Read/Write speed on the disk compared to the machines used in the evaluation of the paper will lead to faster build times.
+
+   If you're using a remote vm, you can use `scp` to copy the results to your local machine. For example, if you're using an AWS VM, you can run the following command from your local machine, E.g.:
+   ```bash
+   scp -i <path-to-your-aws-key> -r ubuntu@<your-aws-ip>:~/ATC25-2dfs-artifacts-evaluation/fig8_reproduced.pdf .
+   ```
+   Where `<path-to-your-aws-key>` is the path to your AWS key, `<your-aws-ip>` is the public IP of your AWS VM.
+
+   The results might slightly differ in scale from the values of the paper due to different machine configurations and environments. For example, faster Read/Write speed on the disk compared to the machines used in the evaluation of the paper will lead to faster build times.
 
 ## Evaluation Scripts 
 
@@ -170,28 +180,12 @@ At the end of the execution, the script will save the results in a file called `
 Figures 11, 12, and 13 are generated together as part of the same experiment. 
 To run the evaluation for Figures 11, 12, and 13, follow these steps:
 
-- First, authorize the `2DFS+OCI` compliant registry to run locally. This is required to run the evaluation scripts. Edit the `/etc/docker/daemon.json` file and either replace its content with the following lines or simply add the primitive: 
-```json
-{
-    "insecure-registries" : ["0.0.0.0:10500"]
-}
-```
-- Then restart the Docker daemon by running:
+
+- To run the evaluation for Figure 11,12 and 13, run the following command:
 ```bash
-    sudo systemctl restart docker
+   python3 fig11-13.py
 ```
-- Now you can run the 2DFS+OCI compliant registry locally using: 
-```bash
-docker run -d -p 10500:5000 --restart=always --name 2dfs-registry ghcr.io/2dfs/2dfs-registry:edge
-```
-- Then run the evaluation script:
-```bash
-    python3 fig11-13.py
-```
-- After the experiment is finished, you can shut down the registry by running the following:
-```bash
-    docker stop 2dfs-registry
-```
+
 
 #### Expected behavior:
 The script should run multiple Docker and TDFS builds, each one with a different configuration. At the end of each build, it pushes the artifacts to the local registry. Then, it performs different pulls for each image partition. 
