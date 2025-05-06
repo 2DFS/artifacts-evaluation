@@ -12,3 +12,6 @@ __pycache__/
 *.ipynb_checkpoints
 *.log
 *.csv
+*_reproduced.pdf
+Dockerfile
+2dfs.json
