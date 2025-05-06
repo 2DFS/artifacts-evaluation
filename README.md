@@ -76,7 +76,7 @@ If you are looking for a VM to replicate the results, we tested the code on an A
 
    If you're using a remote vm, you can use `scp` to copy the results to your local machine. For example, if you're using an AWS VM, you can run the following command from your local machine, E.g.:
    ```bash
-   scp -i <path-to-your-aws-key> -r ubuntu@<your-aws-ip>:~/ATC25-2dfs-artifacts-evaluation/fig8_reproduced.pdf .
+   scp -i <path-to-your-aws-key> ubuntu@<your-aws-ip>:~/ATC25-2dfs-artifacts-evaluation/fig8_reproduced.pdf .
    ```
    Where `<path-to-your-aws-key>` is the path to your AWS key, `<your-aws-ip>` is the public IP of your AWS VM.
 
