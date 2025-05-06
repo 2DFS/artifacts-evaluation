@@ -163,7 +163,7 @@ N.b.: the download time is not considered in the final results of the paper as i
 #### Results:
 At the end of the execution, the script will save the results in a file called `results_fig10.csv` and `cpumemoryusage.csv` in the current directory. The former contains the build output, like in Figs 8 and 9, while the latter contains the CPU and memory consumption measurements during the experiments. The script will also generate a plot of the results and save it in a file called `fig10_reproduced.pdf` in the current directory. 
 
-**Disclaimer:** CPU and memory measurements fluctuate based on machine usage in real-time. Please consider this when interpreting the results. Additionally, due to high fluctuations, the standard deviation of the measurements can be high; this effect is mitigated by running the experiment multiple times.
+**Disclaimer:** CPU and memory measurements fluctuate based on machine usage in real-time. Please consider this when interpreting the results. **Additionally** In this single-vm experiment, the CPU and memory measurements are affected by both the runtime making the request and the registry serving the images. Therefore, the memory and consumption might result slightly higher than the one presented in the paper where the registry was hosted in an isolated machine. 
 
 ### Figures 11, 12, and 13: Download of partitioned vs prebuilt images.
 

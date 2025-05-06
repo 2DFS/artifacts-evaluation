@@ -77,27 +77,24 @@ def gen_figure():
     docker_data = [["ratio","type","data","tool"]]
     tdfs_data = [["ratio","type","data","tool"]]
     for index, row in df_xtended.iterrows():
-        cpuvals = cpu_df[cpu_df["time"].between(row["timestamp"]-(row["tot"]*1000-2000),row["timestamp"]+1000)][cpu_df["type"]=="CPU"]["amount"].values
+        #increase the time window to 1 second to take into account time it takes to reveal CPU spikes
+        cpuvals = cpu_df[cpu_df["time"].between(row["timestamp"]-(row["tot"]*1000)-1000,row["timestamp"]+1000)][cpu_df["type"]=="CPU"]["amount"].values
         for v in cpuvals:
             if row["tool"]=="docker":
                 docker_data.append([row["ratio"],"cpu",v,"docker"])
             else:
                 tdfs_data.append([row["ratio"],"cpu",v,"tdfs"])
 
-        memvals= cpu_df[cpu_df["time"].between(row["timestamp"]-(row["tot"]*1000-2000),row["timestamp"]+1000)][cpu_df["type"]=="MEM"]["amount"].values
+        memvals= cpu_df[cpu_df["time"].between(row["timestamp"]-(row["tot"]*1000)-1000,row["timestamp"]+1000)][cpu_df["type"]=="MEM"]["amount"].values
         for v in memvals:
             if row["tool"]=="docker":
                 docker_data.append([row["ratio"],"mem",v,"docker"])
-                print("docker mem ",v)
             else:
                 tdfs_data.append([row["ratio"],"mem",v,"tdfs"])
-                print("tdfs mem ",v)
 
     tdfs_df = pd.DataFrame(tdfs_data[1:],columns=tdfs_data[0])
     docker_df = pd.DataFrame(docker_data[1:],columns=docker_data[0])
     combined_df = pd.concat([tdfs_df,docker_df])
-
-
     
     combined_df['hue'] = combined_df['tool'] + "-" + combined_df['type']
     ax = sns.barplot(data=combined_df, x="ratio", y="data", hue="hue", errorbar="sd", palette=colors, linewidth=1, edgecolor='black',estimator="mean",hue_order=["tdfs-cpu","docker-cpu","tdfs-mem","docker-mem"])
