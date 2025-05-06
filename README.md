@@ -17,8 +17,8 @@ The code is not intended for production use and is not supported. In no event sh
 If you are looking for a VM to replicate the results, we tested the code on an AWS VM with the following configuration:
 
 <img src="./figs/aws_vm_summary.png" alt="image" width="300"/>
-<img src="./figs/aws_image_config.png" alt="image" width="300"/>
-<img src="./figs/aws_cpu.png" alt="image" width="300"/>
+<img src="./figs/aws_image_config.png" alt="image" width="500"/>
+<img src="./figs/aws_cpu.png" alt="image" width="500"/>
 
 - **OS:** Ubuntu 22.04 Server SSD Volume type
 - **Instance type:** `c5.4xlarge`
