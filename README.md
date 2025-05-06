@@ -13,6 +13,19 @@ The code is not intended for production use and is not supported. In no event sh
 
 # How to reproduce the paper results
 
+## Looking for a VM to replicate the results?
+If you are looking for a VM to replicate the results, we tested the code on an AWS VM with the following configuration:
+
+![](figs/aws_vm_summary.png)
+![](figs/aws_image_config.png)
+![](figs/aws_cpu.png)
+- **OS:** Ubuntu 22.04 Server SSD Volume type
+- **Instance type:** `c5.4xlarge`
+- **vCPUs:** 4x
+- **RAM:** 8 GB
+- **Disk:** 40 GB
+
+
 ## Requirements
 - Ubuntu 22.04 or newer. This code has been tested on Ubuntu 22.04. 
 - Docker installation (please follow [this guide](https://docs.docker.com/engine/install/) )
@@ -26,7 +39,7 @@ The code is not intended for production use and is not supported. In no event sh
      sudo apt-get install ifstat 
  ```
 
-## Overview
+## Experiment setup
 
 **Q:** How to evaluate the 2DFS artifacts presented in the ATC 2025 Paper?  <br>
 **A:** The evaluation is based on the following steps:
