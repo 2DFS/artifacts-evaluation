@@ -15,8 +15,8 @@ The code is not intended for production use and is not supported. In no event sh
 
 Following, a guide to reproduce the results presented in the paper. The guide is divided into sections, each one corresponding to a figure in the paper. Each section contains a description of the figure, the expected behavior of the script, and the results of the experiment.
 
-If something is not clear from the guide below, we also made a short YouTube tutorial on how to set up a VM and run the experiments. The video is available here: ![https://www.youtube.com/watch?v=3Tr-el_8LqY](https://img.shields.io/badge/Tutorial-Tutorial?style=flat&logo=youtube&logoSize=auto&labelColor=%23282828&color=%23FF0000&link=https%3A%2F%2Fyoutu.be%2F3Tr-el_8LqY
-)
+If something is not clear from the guide below, we also made a short YouTube tutorial on how to set up a VM and run the experiments. The video is available here: ![YouTube](https://img.shields.io/badge/Tutorial-Tutorial?style=flat&logo=youtube&logoSize=auto&labelColor=%23282828&color=%23FF0000&link=https%3A%2F%2Fyoutu.be%2F3Tr-el_8LqY)
+
 
 ## Table of contents
 - [Looking for a VM to replicate the results?](#looking-for-a-vm-to-replicate-the-results)
