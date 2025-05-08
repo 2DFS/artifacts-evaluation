@@ -34,7 +34,7 @@ If you are looking for a VM to replicate the results, we tested the code on an A
   ```
 - Install Docker, pip3, venv and ifstat running:
   ```bash
-  wget https://raw.githubusercontent.com/2DFS/artifacts-evaluation/refs/heads/main/install_requirements.sh && chmod +x install_requirements.sh && sudo ./install_requirements.sh
+  wget https://raw.githubusercontent.com/2DFS/artifacts-evaluation/refs/heads/main/install_requirements.sh && chmod +x install_requirements.sh && sudo ./install_requirements.sh && newgrp docker
   ```
 
 > **Requirements installation troubleshooting**
