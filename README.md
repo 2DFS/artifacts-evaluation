@@ -27,25 +27,33 @@ If you are looking for a VM to replicate the results, we tested the code on an A
 - **Disk:** 40 GB
 
 ## Requirements
-- Ubuntu 22.04 or newer. This code has been tested on Ubuntu 22.04. 
-- Docker installation (please follow [this guide](https://docs.docker.com/engine/install/ubuntu/))
-- Rootless Docker installation. This is required to run the evaluation scripts without `sudo`. To do this, you need to add your user to the `docker` group. Please refer to the following [Docker Rootless documentation](https://docs.docker.com/engine/install/linux-postinstall/).
+- Ubuntu 22.04 or newer. This code has been tested on Ubuntu 22.04.
 - Python 3.8 or higher installed. You can check your Python version by running:
   ```bash
   python3 --version
   ```
-- `pip3` installed. You can install pip3 using:
-  ```
-  sudo apt install python3-pip
-  ```
-- `venv` python virtual environment. You can install venv using:
-  ```
-  sudo apt install python3-venv
-  ```
-- Install `ifstat`. Simply run:
+- Install Docker, pip3, venv and ifstat running:
   ```bash
-  sudo apt-get install ifstat 
+  wget https://raw.githubusercontent.com/2DFS/artifacts-evaluation/refs/heads/main/install_requirements.sh && chmod +x install_requirements.sh && sudo ./install_requirements.sh
   ```
+
+> **Requirements installation troubleshooting**
+>
+> If the install requirements scripts fails the requirements can be manually installed using following the next steps:
+> - Docker installation (please follow [this guide](https://docs.docker.com/engine/install/ubuntu/))
+>- Rootless Docker installation. This is required to run the evaluation scripts without `sudo`. To do this, you need to add your user to the `docker` group. Please refer to the following [Docker Rootless documentation](https://docs.docker.com/engine/install/linux-postinstall/).
+> - `pip3` installed. You can install pip3 using:
+>  ```
+>  sudo apt install python3-pip
+>  ```
+> - `venv` python virtual environment. You can install venv using:
+>  ```
+>  sudo apt install python3-venv
+>  ```
+> - Install `ifstat`. Simply run:
+>  ```bash
+>  sudo apt-get install ifstat 
+>  ```
 
 ## Experiment setup
 
