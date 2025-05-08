@@ -17,10 +17,6 @@ apt-get update -y
 # Install docker 
 apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
-# Sudoless docker
-groupadd docker
-usermod -aG docker $USER
-
 # Install pip
 apt install -y python3-pip
 
