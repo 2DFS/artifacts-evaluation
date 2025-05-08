@@ -13,6 +13,26 @@ The code is not intended for production use and is not supported. In no event sh
 
 # How to reproduce the paper results
 
+Following, a guide to reproduce the results presented in the paper. The guide is divided into sections, each one corresponding to a figure in the paper. Each section contains a description of the figure, the expected behavior of the script, and the results of the experiment.
+
+If something is not clear from the guide below, we also made a short YouTube tutorial on how to set up a VM and run the experiments. The video is available here: 
+<a href="https://www.youtube.com/watch?v=3Tr-el_8LqY" target="_blank"><img alt="Static Badge" src="https://img.shields.io/badge/Tutorial-Tutorial?style=flat&logo=youtube&logoSize=auto&labelColor=%23282828&color=%23FF0000&link=https%3A%2F%2Fyoutu.be%2F3Tr-el_8LqY">
+</a>
+
+
+## Table of contents
+- [Looking for a VM to replicate the results?](#looking-for-a-vm-to-replicate-the-results)
+- [Requirements](#requirements)
+- [Experiment setup](#experiment-setup)
+- [Evaluation Scripts](#evaluation-scripts)
+  - [Figure 8: Build time for a single image with increasing number of splits per layer.](#figure-8-build-time-for-a-single-image-with-increasing-number-of-splits-per-layer)
+  - [Figure 9: Build time for different split partitions where each partition is packaged as a separate image.](#figure-9-build-time-for-different-split-partitions-where-each-partition-is-packaged-as-a-separate-image)
+  - [Figure 10: Resources consumption during image build.](#figure-10-resources-consumption-during-image-build)
+  - [Figures 11, 12, and 13: Download of partitioned vs prebuilt images.](#figures-11-12-and-13-download-of-partitioned-vs-prebuilt-images)
+  - [Figure 14: Build time after model updates with image caching.](#figure-14-build-time-after-model-updates-with-image-caching)
+  - [How to interpret the results](#how-to-interpret-the-results)
+  - [What about Fig 15?](#what-about-fig-15)
+
 ## Looking for a VM to replicate the results?
 If you are looking for a VM to replicate the results, we tested the code on an AWS VM with the following configuration:
 
@@ -112,6 +132,9 @@ These artifact evaluation scripts reproduce all the results presented in the Eva
 ```bash
    python3 fig8.py
 ```
+> Please make sure you have stable connectivity and that the experiment is not interrupted. In case the experiment is interrupted because of a VM disconnection, make sue to follow again the preparation step `1. **Setup the environment**`
+
+
 #### Expected behavior:
 During the experiment, for each experiment configuration, the script will print messages like the following:
 ```bash
@@ -136,6 +159,8 @@ At the end of the execution, the script will save the results in a file called `
 ```bash
    python3 fig9.py
 ```
+> Please make sure you have stable connectivity and that the experiment is not interrupted. In case the experiment is interrupted because of a VM disconnection, make sue to follow again the preparation step `1. **Setup the environment**`
+
 #### Expected behavior:
 During the experiment, for each experiment configuration, the script will print messages like the following:
 ```bash
@@ -160,6 +185,8 @@ At the end of the execution, the script will save the results in a file called `
 ```bash
    python3 fig10.py
 ```
+> Please make sure you have stable connectivity and that the experiment is not interrupted. In case the experiment is interrupted because of a VM disconnection, make sue to follow again the preparation step `1. **Setup the environment**`
+
 #### Expected behavior:
 During the experiment, for each experiment configuration, the script will print messages like the following:
 ```bash
@@ -192,7 +219,7 @@ To run the evaluation for Figures 11, 12, and 13, follow these steps:
 ```bash
    python3 fig11-13.py
 ```
-
+> Please make sure you have stable connectivity and that the experiment is not interrupted. In case the experiment is interrupted because of a VM disconnection, make sue to follow again the preparation step `1. **Setup the environment**`
 
 #### Expected behavior:
 The script should run multiple Docker and TDFS builds, each one with a different configuration. At the end of each build, it pushes the artifacts to the local registry. Then, it performs different pulls for each image partition. 
@@ -213,6 +240,8 @@ At the end of the execution, the script will save the results in files called `r
 ```bash
    python3 fig14.py
 ```
+> Please make sure you have stable connectivity and that the experiment is not interrupted. In case the experiment is interrupted because of a VM disconnection, make sue to follow again the preparation step `1. **Setup the environment**`
+
 #### Expected behavior:
 During the experiment, the script initially runs a TDFS build and a Docker build for the base images. Then, the script will perform the layer updates according to the experiment configuration and re-perform the build with the new layers. The script will print messages like the following:
 ```bash
@@ -233,3 +262,6 @@ At the end of the execution, the script will save the results in a file called `
 The 2DFS utility is designed to exploit CPU parallelism to boost the image build time. The results of the experiments are highly affected by the number of cores available in the machine as well as the maximum Read/Write speed of the disk. For example, a machine with 16 cores gives much more parallelism to 2DFS compared to a machine with 4, while Docker builds are pretty much only affected by the processing speed and not parallelism. While the results are reproducible and potentially consistent, the scale of the gap and the absolute values of the build and caching time may vary based on the machine configuration.
 
 Another consideration is that while on the paper, we evaluate using a `2dfs` compliant registry in isolated machines; in this proposed experimental setup, we install everything locally to simplify the installation time. This means that the registry is not isolated from the builder, and the measurements are affected by both the runtime making the request and the registry serving the images. Therefore, the memory and CPU consumption might be slightly higher than the one presented in the paper.
+
+## What about Fig 15?
+Figure 15 requires a complex environment involving multiple machines and a distributed setup. Since Figure 15 does not directly evaluate our solution in terms of core contributions but primarily analyzes the benefits from a distributed ML perspective, we decided not to include it in the artifact evaluation. 
