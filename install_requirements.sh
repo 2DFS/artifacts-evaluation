@@ -16,7 +16,6 @@ apt-get update
 
 groupadd docker
 usermod -aG docker $USER
-newgrp docker
 
 # Install pip
 apt install python3-pip
