@@ -32,9 +32,12 @@ If you are looking for a VM to replicate the results, we tested the code on an A
   ```bash
   python3 --version
   ```
-- Install Docker, pip3, venv and ifstat running:
+- Install Docker, pip3, venv and ifstat running the following commands:
   ```bash
-  wget https://raw.githubusercontent.com/2DFS/artifacts-evaluation/refs/heads/main/install_requirements.sh && chmod +x install_requirements.sh && sudo ./install_requirements.sh && newgrp docker
+  wget https://raw.githubusercontent.com/2DFS/artifacts-evaluation/refs/heads/main/install_requirements.sh && chmod +x install_requirements.sh && sudo ./install_requirements.sh 
+  sudo groupadd docker
+  sudo usermod -aG docker $USER
+  newgrp docker
   ```
 
 > **Requirements installation troubleshooting**
